@@ -1,0 +1,8 @@
+# IntelliJ configuration files
+/.idea/
+
+# Eclipse configuration files
+/.settings/
+
+# Maven build files
+/target/
