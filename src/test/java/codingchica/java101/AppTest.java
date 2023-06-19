@@ -12,21 +12,42 @@ public class AppTest {
 
     /**
      * Unit tests for the getGreeting method.
+     *
      * @see App#getGreeting()
      */
     @Nested
-  class GetGreetingTest {
-      @Test
-      void getGreeting_whenInvoked_thenExpectedResultReturned() {
-          // Setup
-          String expectedGreeting = "Hello, gorgeous!";
-          App app = new App();
+    class GetGreetingTest {
+        @Test
+        void getGreeting_whenInvoked_thenExpectedResultReturned() {
+            // Setup
+            String expectedGreeting = "Hello, gorgeous!";
+            App app = new App();
 
-          // Execution
-          String actualGreeting = app.getGreeting();
+            // Execution
+            String actualGreeting = app.getGreeting();
 
-          // Validation
-          assertEquals(expectedGreeting, actualGreeting, "greeting");
-      }
-  }
+            // Validation
+            assertEquals(expectedGreeting, actualGreeting, "greeting");
+        }
+    }
+
+    /**
+     * Unit tests for the main method.
+     *
+     * @see App#main(String[])
+     */
+    @Nested
+     class MainTest {
+
+        @Test
+        void main_whenInvoked_thenNoException() {
+            // Setup
+
+            // Execution
+            App.main(null);
+
+            // Validation
+            // TODO Only tests that the application runs successfully, not the actual behavior.
+        }
+    }
 }
