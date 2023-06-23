@@ -2,6 +2,8 @@ package codingchica.java101;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,17 +19,18 @@ public class AppTest {
      */
     @Nested
     class GetGreetingTest {
-        @Test
-        void getGreeting_whenInvoked_thenExpectedResultReturned() {
+        @ParameterizedTest
+        @ValueSource(strings = {"Maddie", "Izzie", "Bob"})
+        void getGreeting_whenInvoked_thenExpectedResultReturned(String name) {
             // Setup
-            String expectedGreeting = "Hello, gorgeous!";
-            App app = new App();
+            String expectedGreeting = String.format("Hello, %s!", name);
+            App app = new App(name);
 
             // Execution
             String actualGreeting = app.getGreeting();
 
             // Validation
-            assertEquals(expectedGreeting, actualGreeting, "greeting");
+            assertEquals(expectedGreeting, actualGreeting, () -> String.format("greeting for %s", name));
         }
     }
 
