@@ -75,4 +75,48 @@ public class AppTest {
             assertEquals(expectedResult, actualResult, () -> String.format("%s+%s=%s", value1, value2, expectedResult));
         }
     }
+
+    /**
+     * Unit tests for the add method.
+     *
+     * @see App#add(short, short)
+     */
+    @Nested
+    class AddShortsTest {
+
+        @ParameterizedTest
+        @CsvSource({
+                // Happy Path - Positive
+                "1,2,3",
+                // Happy Path - Neutral
+                "0,0,0",
+                // Happy Path - Negative
+                "-1,-1,-2",
+                // Edge Case - Upper Bound short
+                "1,32766,32767",
+                "32766,1,32767",
+                // Edge Case - Lower Bound short
+                "-1,-32767,-32768",
+                "-32767,-1,-32768",
+                // Edge Case - Beyond Upper Bound - short
+                "1,32767,32768",
+                "32767,2,32769",
+                // Edge Case - Beyond Lower Bound - short
+                "-1,-32768,-32769",
+                "-32768,-2,-32770",
+                // Edge Case - Minimum short values
+                "-32768,-32768,-65536",
+                // Edge Case - Maximum short values
+                "32767,32767,65534",
+        })
+        void add_whenInvoked_thenReturnsExpectedResult(short value1, short value2, int expectedResult) {
+            // Setup
+
+            // Execution
+            int actualResult = App.add(value1, value2);
+
+            // Validation
+            assertEquals(expectedResult, actualResult, () -> String.format("%s+%s=%s", value1, value2, expectedResult));
+        }
+    }
 }
