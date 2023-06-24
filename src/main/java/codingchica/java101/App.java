@@ -4,6 +4,16 @@ package codingchica.java101;
  * Hello world!
  */
 public class App {
+    /**
+     * Add two byte values.
+     *
+     * @param byteValue1 The first value to add.
+     * @param byteValue2 The second value to add.
+     * @return A byte value representing the two values added together.
+     */
+    public static byte add(byte byteValue1, byte byteValue2) {
+        return (byte) (byteValue1 + byteValue2);
+    }
 
     /**
      * Constructor for the App class.
