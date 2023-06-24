@@ -64,40 +64,14 @@ public class AppTest {
     class AddBytesTest {
 
         @ParameterizedTest
-        @CsvSource({"1,2,3", "0,0,0", "-1,1,0"})
-        void add_whenInvoked_thenReturnsExpectedResult(byte value1, byte value2, byte expectedResult) {
+        @CsvSource({"1,2,3", "0,0,0", "-1,1,0", "127,1,128", "127,2,129", "-128,-1,-129", "-128,-2,-130"})
+        void add_whenInvoked_thenReturnsExpectedResult(byte value1, byte value2, int expectedResult) {
             // Setup
 
             // Execution
-            byte actualResult = App.add(value1, value2);
+            int actualResult = App.add(value1, value2);
 
             // Validation
-            assertEquals(expectedResult, actualResult, () -> String.format("%s+%s=%s", value1, value2, expectedResult));
-        }
-
-        @ParameterizedTest
-        @CsvSource({"127,1,-128", "127,2,-127",})
-        void add_whenInvokedWithOverflow_thenReturnsIntegerWrapAroundValues(byte value1, byte value2, byte expectedResult) {
-            // Setup
-
-            // Execution
-            byte actualResult = App.add(value1, value2);
-
-            // Validation
-            // TODO - Add logic for error condition rather than returning successfully.
-            assertEquals(expectedResult, actualResult, () -> String.format("%s+%s=%s", value1, value2, expectedResult));
-        }
-
-        @ParameterizedTest
-        @CsvSource({"-128,-1,127", "-128,-2,126",})
-        void add_whenInvokedWithUnderflow_thenReturnsIntegerWrapAroundValues(byte value1, byte value2, byte expectedResult) {
-            // Setup
-
-            // Execution
-            byte actualResult = App.add(value1, value2);
-
-            // Validation
-            // TODO - Add logic for error condition rather than returning successfully.
             assertEquals(expectedResult, actualResult, () -> String.format("%s+%s=%s", value1, value2, expectedResult));
         }
     }

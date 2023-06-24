@@ -9,10 +9,10 @@ public class App {
      *
      * @param byteValue1 The first value to add.
      * @param byteValue2 The second value to add.
-     * @return A byte value representing the two values added together.
+     * @return An int value representing the two values added together.
      */
-    public static byte add(byte byteValue1, byte byteValue2) {
-        return (byte) (byteValue1 + byteValue2);
+    public static int add(byte byteValue1, byte byteValue2) {
+        return byteValue1 + byteValue2;
     }
 
     /**
