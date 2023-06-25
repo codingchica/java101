@@ -64,7 +64,24 @@ public class AppTest {
     class AddBytesTest {
 
         @ParameterizedTest
-        @CsvSource({"1,2,3", "0,0,0", "-1,1,0", "127,1,128", "127,2,129", "-128,-1,-129", "-128,-2,-130"})
+        @CsvSource({
+                // Happy-Path - Positive
+                "1,2,3",
+                // Happy-Path - Neutral
+                "0,0,0",
+                // Happy-Path - Negative
+                "-1,-1,-2",
+                // Edge Cases - Past Maximum byte
+                "127,1,128",
+                "2,127,129",
+                // Edge Cases - Below Minimum byte
+                "-128,-1,-129",
+                "-2,-128,-130",
+                // Edge Case - Minimum possible byte
+                "-128,-128,-256",
+                // Edge Case - Maximum possible byte
+                "127,127,254",
+        })
         void add_whenInvoked_thenReturnsExpectedResult(byte value1, byte value2, int expectedResult) {
             // Setup
 
