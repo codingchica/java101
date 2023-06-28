@@ -27,6 +27,23 @@ public class App {
     }
 
     /**
+     * Add two int values.
+     *
+     * @param intValue1 The first value to add.
+     * @param intValue2 The second value to add.
+     * @return An int value representing the two values added together.
+     */
+    public static int add(int intValue1, int intValue2) {
+        long sum = (long) intValue1 + (long) intValue2;
+        if (sum < Integer.MIN_VALUE) {
+            throw new IllegalArgumentException(String.format("int underflow with addends:  %s and %s", intValue1, intValue2));
+        } else if (sum > Integer.MAX_VALUE) {
+            throw new IllegalArgumentException(String.format("int overflow with addends:  %s and %s", intValue1, intValue2));
+        }
+        return (int) sum;
+    }
+
+    /**
      * Constructor for the App class.
      *
      * @param name The name to use in the application's execution.

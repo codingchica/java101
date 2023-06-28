@@ -2,11 +2,13 @@ package codingchica.java101;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Unit test for simple App.
@@ -134,6 +136,82 @@ public class AppTest {
 
             // Validation
             assertEquals(expectedResult, actualResult, () -> String.format("%s+%s=%s", value1, value2, expectedResult));
+        }
+    }
+
+    /**
+     * Unit tests for the add method.
+     *
+     * @see App#add(int, int)
+     */
+    @Nested
+    class AddIntsTest {
+
+        @ParameterizedTest
+        @CsvSource({
+                // Happy-path - Positive
+                "1,2,3",
+                // Happy-path - Neutral
+                "0,0,0",
+                // Happy-path - Negative
+                "-1,-1,-2",
+                // Edge Case - Upper Bound
+                "2147483646,1,2147483647",
+                "2,2147483645,2147483647",
+                // Edge Case - Lower Bound
+                "-2147483647,-1,-2147483648",
+                "-2,-2147483646,-2147483648",
+                // Edge Case - Beyond Upper Bound - N/A - Exception thrown
+                // Edge Case - Beyond Lower Bound - N/A - Exception thrown
+        })
+        void add_whenInvokedWhereIntResults_thenReturnsExpectedResult(int value1, int value2, int expectedResult) {
+            // Setup
+
+            // Execution
+            int actualResult = App.add(value1, value2);
+
+            // Validation
+            assertEquals(expectedResult, actualResult, () -> String.format("%s+%s=%s", value1, value2, expectedResult));
+        }
+
+        @ParameterizedTest
+        @CsvSource({
+                // Edge case - just beyond upper bound
+                "2147483647,1",
+                "3,2147483646",
+                // Edge case - Maximum possible value
+                "2147483647,2147483647"
+        })
+        void add_whenInvokedForSumOverflow_thenThrowsException(int value1, int value2) {
+            // Setup
+            String expectedMessage = String.format("int overflow with addends:  %s and %s", value1, value2);
+
+            // Execution
+            Executable executable = () -> App.add(value1, value2);
+
+            // Validation
+            Exception exception = assertThrows(IllegalArgumentException.class, executable, () -> String.format("%s+%s", value1, value2));
+            assertEquals(expectedMessage, exception.getMessage(), "IllegalArgumentException message");
+        }
+
+
+        @ParameterizedTest
+        @CsvSource({
+                // Edge case - just beyond lower bound
+                "-2147483648,-1",
+                // Swapping large/small order and further beyond lower bound
+                "-3,-2147483647",
+        })
+        void add_whenInvokedForSumUnderflow_thenThrowsException(int value1, int value2) {
+            // Setup
+            String expectedMessage = String.format("int underflow with addends:  %s and %s", value1, value2);
+
+            // Execution
+            Executable executable = () -> App.add(value1, value2);
+
+            // Validation
+            Exception exception = assertThrows(IllegalArgumentException.class, executable, () -> String.format("%s+%s", value1, value2));
+            assertEquals(expectedMessage, exception.getMessage(), "IllegalArgumentException message");
         }
     }
 }
