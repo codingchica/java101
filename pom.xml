@@ -55,6 +55,8 @@
           <configuration>
             <!-- argLine will be set by jacoco-maven-plugin -->
             <argLine>${argLine}</argLine>
+            <parallel>all</parallel>
+            <runOrder>random</runOrder>
           </configuration>
         </plugin>
         <plugin>
