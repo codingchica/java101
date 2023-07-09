@@ -39,4 +39,4 @@ jobs:
    
     # Perform the Maven build locally.  No artifacts are deployed
     - name: Build with Maven
-      run: mvn -B doesNotExist package --file pom.xml
+      run: mvn -B package --file pom.xml
