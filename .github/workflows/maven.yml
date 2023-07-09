@@ -1,0 +1,42 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+# When to perform the build action.
+on:
+  push:
+    # When changes are made to the key branches
+    branches: [ "main" ]
+  pull_request:
+    # When a pull request targets a key branch
+    branches: [ "main" ]
+
+# What will be done as part of this action.
+jobs:
+  build:
+
+    # Default version - Linux servers.  Shouldn't matter for this project.
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the code from the source code repository.
+    - uses: actions/checkout@v3
+    
+    # Setup the desired Java version in the environment with a Maven local 
+    # cache of dependencies (better build performance)
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+   
+    # Perform the Maven build locally.  No artifacts are deployed
+    - name: Build with Maven
+      run: mvn -B doesNotExist package --file pom.xml
