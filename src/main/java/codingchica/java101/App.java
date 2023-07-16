@@ -1,5 +1,8 @@
 package codingchica.java101;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * Hello world!
  */
@@ -59,23 +62,10 @@ public class App {
     /**
      * The name of the user of the application.
      */
+    @Getter
+    @Setter
     private String name;
 
-    /**
-     * Getter for the name field.
-     * @return The current value of the name field.
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Setter for the newName field.
-     * @param newName The new value for the name field.
-     */
-    public void setName(final String newName) {
-        this.name = newName;
-    }
 
     /**
      * Retrieve the greeting that should be outputted when the application is

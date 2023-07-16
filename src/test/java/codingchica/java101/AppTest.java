@@ -216,33 +216,33 @@ public class AppTest {
     }
 
     @Nested
-class NameTest {
+    class NameTest {
 
-    @ParameterizedTest
-    @ValueSource(strings = {"Sally", "Suzie", "Billy"})
-    void getName_whenPopulatedFromConstructor_thenReturnsExpectedValue(String name) {
-        // Setup
-        App app = new App(name);
+        @ParameterizedTest
+        @ValueSource(strings = {"Sally", "Suzie", "Billy"})
+        void getName_whenPopulatedFromConstructor_thenReturnsExpectedValue(String name) {
+            // Setup
+            App app = new App(name);
 
-        // Execution
-        String actualGreeting = app.getName();
+            // Execution
+            String actualGreeting = app.getName();
 
-        // Validation
-        assertEquals(name, actualGreeting);
+            // Validation
+            assertEquals(name, actualGreeting);
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"Rachel", "Jeannine", "Andrew"})
+        void getName_whenPopulatedFromSetter_thenReturnsExpectedValue(String name) {
+            // Setup
+            App app = new App("Pattie");
+            app.setName(name);
+
+            // Execution
+            String actualGreeting = app.getName();
+
+            // Validation
+            assertEquals(name, actualGreeting);
+        }
     }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Rachel", "Jeannine", "Andrew"})
-    void getName_whenPopulatedFromSetter_thenReturnsExpectedValue(String name) {
-        // Setup
-        App app = new App("Pattie");
-        app.setName(name);
-
-        // Execution
-        String actualGreeting = app.getName();
-
-        // Validation
-        assertEquals(name, actualGreeting);
-    }
-}
 }
