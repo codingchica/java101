@@ -23,6 +23,57 @@ public class Animal {
     private Instant timeOfBirth = null;
 
     /**
+     * Retrieve the age for the animal in years.  An animal that has not
+     * yet been born will have a negative age.
+     *
+     * @return The age of the animal in years, or a negative
+     * number if the animal has not yet been born or hatched.
+     */
+    public long getAgeInYears() {
+        long age = -1;
+        if (timeOfBirth != null) {
+            Instant now = Instant.now();
+            Duration difference = Duration.between(now, timeOfBirth);
+            age = difference.toDays() / AVERAGE_DAYS_IN_YEAR;
+        }
+        return age;
+    }
+
+    /**
+     * Retrieve the age for the animal in days.  An animal that has not
+     * yet been born will have a negative age.
+     *
+     * @return The age of the animal in days, or a negative
+     * number if the animal has not yet been born or hatched.
+     */
+    public long getAgeInDays() {
+        long age = -1;
+        if (timeOfBirth != null) {
+            Instant now = Instant.now();
+            Duration difference = Duration.between(now, timeOfBirth);
+            age = difference.toDays();
+        }
+        return age;
+    }
+
+    /**
+     * Retrieve the age for the animal in hours.  An animal that has not
+     * yet been born will have a negative age.
+     *
+     * @return The age of the animal in days, or a negative
+     * number if the animal has not yet been born or hatched.
+     */
+    public long getAgeInHours() {
+        long age = -1;
+        if (timeOfBirth != null) {
+            Instant now = Instant.now();
+            Duration difference = Duration.between(now, timeOfBirth);
+            age = difference.toHours();
+        }
+        return age;
+    }
+
+    /**
      * Retrieve the age for the animal.  An animal that has not yet been born
      * will have a negative age.
      *
@@ -36,7 +87,6 @@ public class Animal {
         if (timeOfBirth != null) {
             Instant now = Instant.now();
             Duration difference = Duration.between(now, timeOfBirth);
-            System.out.println(difference.toString());
             age = switch (unit) {
                 case YEARS -> difference.toDays() / AVERAGE_DAYS_IN_YEAR;
                 case DAYS -> difference.toDays();
