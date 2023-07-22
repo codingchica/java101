@@ -26,9 +26,12 @@ public class Animal {
      * Retrieve the age for the animal in years.  An animal that has not
      * yet been born will have a negative age.
      *
+     * @deprecated As of 0.1, replaced by {@link #getAge(AgeUnits)}
+     *
      * @return The age of the animal in years, or a negative
      * number if the animal has not yet been born or hatched.
      */
+    @Deprecated(since = "0.1", forRemoval = false)
     public long getAgeInYears() {
         long age = -1;
         if (timeOfBirth != null) {
@@ -43,9 +46,12 @@ public class Animal {
      * Retrieve the age for the animal in days.  An animal that has not
      * yet been born will have a negative age.
      *
+     * @deprecated As of 0.1, replaced by {@link #getAge(AgeUnits)}
+     *
      * @return The age of the animal in days, or a negative
      * number if the animal has not yet been born or hatched.
      */
+    @Deprecated(since = "0.1", forRemoval = false)
     public long getAgeInDays() {
         long age = -1;
         if (timeOfBirth != null) {
@@ -60,9 +66,12 @@ public class Animal {
      * Retrieve the age for the animal in hours.  An animal that has not
      * yet been born will have a negative age.
      *
+     * @deprecated As of 0.1, replaced by {@link #getAge(AgeUnits)}
+     *
      * @return The age of the animal in days, or a negative
      * number if the animal has not yet been born or hatched.
      */
+    @Deprecated(since = "0.1", forRemoval = false)
     public long getAgeInHours() {
         long age = -1;
         if (timeOfBirth != null) {
