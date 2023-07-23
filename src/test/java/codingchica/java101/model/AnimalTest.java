@@ -15,6 +15,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class AnimalTest {
 
     /**
+     * An instance of the object under test.
+     */
+    private Animal animal = new Animal();
+
+    /**
      * Unit tests for the no-argument constructor.
      */
     @Nested
@@ -41,7 +46,6 @@ class AnimalTest {
         @Test
         void getTimeOfBirth_whenDefaultedInConstructor_thenReturnsExpectedValue() {
             // Setup
-            Animal animal = new Animal();
 
             // Execution
             Instant result = animal.getTimeOfBirth();
@@ -55,7 +59,6 @@ class AnimalTest {
         void getName_whenPopulatedFromSetter_thenReturnsExpectedValue(RelativeTime value) {
             // Setup
             Instant expectedValue = value.getInstant();
-            Animal animal = new Animal();
             animal.setTimeOfBirth(expectedValue);
 
             // Execution
@@ -76,7 +79,6 @@ class AnimalTest {
         @Test
         void getAgeInYears_whenNull_thenReturnsExpectedValue(){
             // Setup
-            Animal animal = new Animal();
             long expectedResult = -1;
 
             // Execution
@@ -90,7 +92,6 @@ class AnimalTest {
         @EnumSource(value = RelativeTime.class, mode = EnumSource.Mode.EXCLUDE, names = {})
         void getAgeInYears_whenInvokedWithTimeOfBirthSet_thenReturnsExpectedValue(RelativeTime value){
             // Setup
-            Animal animal = new Animal();
             animal.setTimeOfBirth(value.getInstant());
             long expectedResult = switch (value){
                 case TEN_YEARS_AGO -> -10;
@@ -119,7 +120,6 @@ class AnimalTest {
         @Test
         void getAgeInDays_whenNull_thenReturnsExpectedValue(){
             // Setup
-            Animal animal = new Animal();
             long expectedResult = -1;
 
             // Execution
@@ -133,7 +133,6 @@ class AnimalTest {
         @EnumSource(value = RelativeTime.class, mode = EnumSource.Mode.EXCLUDE, names = {})
         void getAgeInDays_whenTimeOfBirthPopulated_thenReturnsExpectedValue(RelativeTime value){
             // Setup
-            Animal animal = new Animal();
             animal.setTimeOfBirth(value.getInstant());
             long expectedResult = switch (value){
                 case TEN_YEARS_AGO -> -3750;
@@ -164,7 +163,6 @@ class AnimalTest {
         @Test
         void getAgeInHours_whenNull_thenReturnsExpectedValue(){
             // Setup
-            Animal animal = new Animal();
             long expectedResult = -1;
 
             // Execution
@@ -178,7 +176,6 @@ class AnimalTest {
         @EnumSource(value = RelativeTime.class, mode = EnumSource.Mode.EXCLUDE, names = {})
         void getAgeInHours_whenTimeOfBirthPopulated_thenReturnsExpectedValue(RelativeTime value){
             // Setup
-            Animal animal = new Animal();
             animal.setTimeOfBirth(value.getInstant());
             long expectedResult = switch (value){
                 case TEN_YEARS_AGO -> -90000;
@@ -208,7 +205,6 @@ class AnimalTest {
         @Test
         void getAge_whenNull_thenReturnsExpectedValue(){
             // Setup
-            Animal animal = new Animal();
             long expectedResult = -1;
 
             // Execution
@@ -222,7 +218,6 @@ class AnimalTest {
         @EnumSource(value = RelativeTime.class, mode = EnumSource.Mode.EXCLUDE, names = {})
         void getAge_whenYears_thenReturnsExpectedValue(RelativeTime value){
             // Setup
-            Animal animal = new Animal();
             animal.setTimeOfBirth(value.getInstant());
             long expectedResult = switch (value){
                 case TEN_YEARS_AGO -> -10;
@@ -243,7 +238,6 @@ class AnimalTest {
         @EnumSource(value = RelativeTime.class, mode = EnumSource.Mode.EXCLUDE, names = {})
         void getAge_whenDays_thenReturnsExpectedValue(RelativeTime value){
             // Setup
-            Animal animal = new Animal();
             animal.setTimeOfBirth(value.getInstant());
             long expectedResult = switch (value){
                 case TEN_YEARS_AGO -> -3750;
@@ -267,7 +261,6 @@ class AnimalTest {
         @EnumSource(value = RelativeTime.class, mode = EnumSource.Mode.EXCLUDE, names = {})
         void getAge_whenHours_thenReturnsExpectedValue(RelativeTime value){
             // Setup
-            Animal animal = new Animal();
             animal.setTimeOfBirth(value.getInstant());
             long expectedResult = switch (value){
                 case TEN_YEARS_AGO -> -90000;
