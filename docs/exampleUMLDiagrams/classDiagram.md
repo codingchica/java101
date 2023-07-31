@@ -10,6 +10,7 @@ them as an image when viewing the markdown file.
 More information:
 - [UML diagrams](http://websites.umich.edu/~eecs381/handouts/UMLNotationSummary.pdf)
 
+## java.util.ArrayList
 ```mermaid
 classDiagram
      direction LR
@@ -108,5 +109,37 @@ classDiagram
     click `java.util.AbstractCollection&lt;E&gt;` href "https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/AbstractCollection.html" "Java 17 Javadoc for java.util.AbstractCollection"
     click `java.util.AbstractList&lt;E&gt;` href "https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/AbstractList.html" "Java 17 Javadoc for java.util.abstractList"
 
+
+```
+
+## codingchica.java101.model.Animal
+```mermaid
+classDiagram
+     direction LR
+    `java.lang.Object` <|-- `codingchica.java101.model.Animal`
+
+    class `java.lang.Object` {
+        +equals(Object obj) boolean
+        +getClass() Class~?~
+        +hashCode() int
+        +notify() 
+        +notifyAll()
+        +toString() String
+        +wait()
+        +wait(long timeoutMillis)
+        +wait(long timeoutMillis, int nanos)
+    }
+    
+    class `codingchica.java101.model.Animal` {
+        +getAgeInYears() long
+        +getAgeInDays() long
+        +getAgeInHours() long
+        +getAge(AgeUnits units) long
+        +getTimeOfBirth() Instant
+        +setTimeOfBirth(Instant timeOfBirth)
+    }
+
+    click `java.lang.Object` href "https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" "Java 17 Javadoc java.lang.Object"
+    click `codingchica.java101.model.Animal` href "https://github.com/codingchica/java101/blob/main/src/main/java/codingchica/java101/model/Animal.java" "codingchica.java101.model.Animal.java"
 
 ```
