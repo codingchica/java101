@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.platform.commons.util.StringUtils;
 
 import java.time.Instant;
 
@@ -38,6 +39,7 @@ class AnimalTest {
 
     /**
      * Unit tests for the timeOfBirth field's getters/setters.
+     *
      * @see Animal#getTimeOfBirth()
      * @see Animal#setTimeOfBirth(Instant)
      */
@@ -71,13 +73,14 @@ class AnimalTest {
 
     /**
      * Unit test for the getAgeInYears method.
+     *
      * @see Animal#getAgeInYears()
      */
     @Nested
     class GetAgeInYearsTest {
 
         @Test
-        void getAgeInYears_whenNull_thenReturnsExpectedValue(){
+        void getAgeInYears_whenNull_thenReturnsExpectedValue() {
             // Setup
             long expectedResult = -1;
 
@@ -90,13 +93,13 @@ class AnimalTest {
 
         @ParameterizedTest
         @EnumSource(value = RelativeTime.class, mode = EnumSource.Mode.EXCLUDE, names = {})
-        void getAgeInYears_whenInvokedWithTimeOfBirthSet_thenReturnsExpectedValue(RelativeTime value){
+        void getAgeInYears_whenInvokedWithTimeOfBirthSet_thenReturnsExpectedValue(RelativeTime value) {
             // Setup
             animal.setTimeOfBirth(value.getInstant());
-            long expectedResult = switch (value){
+            long expectedResult = switch (value) {
                 case TEN_YEARS_AGO -> -10;
                 case YEAR_AGO -> -1;
-                case DAY_AGO,HOUR_AGO, HOUR_AHEAD, DAY_AHEAD -> 0;
+                case DAY_AGO, HOUR_AGO, HOUR_AHEAD, DAY_AHEAD -> 0;
                 case YEAR_AHEAD -> 1;
                 case TEN_YEARS_AHEAD -> 10;
             };
@@ -112,13 +115,14 @@ class AnimalTest {
 
     /**
      * Unit test for the getAgeInDays method.
+     *
      * @see Animal#getAgeInDays()
      */
     @Nested
     class GetAgeInDaysTest {
 
         @Test
-        void getAgeInDays_whenNull_thenReturnsExpectedValue(){
+        void getAgeInDays_whenNull_thenReturnsExpectedValue() {
             // Setup
             long expectedResult = -1;
 
@@ -131,10 +135,10 @@ class AnimalTest {
 
         @ParameterizedTest
         @EnumSource(value = RelativeTime.class, mode = EnumSource.Mode.EXCLUDE, names = {})
-        void getAgeInDays_whenTimeOfBirthPopulated_thenReturnsExpectedValue(RelativeTime value){
+        void getAgeInDays_whenTimeOfBirthPopulated_thenReturnsExpectedValue(RelativeTime value) {
             // Setup
             animal.setTimeOfBirth(value.getInstant());
-            long expectedResult = switch (value){
+            long expectedResult = switch (value) {
                 case TEN_YEARS_AGO -> -3750;
                 case YEAR_AGO -> -366;
                 case DAY_AGO -> -1;
@@ -155,13 +159,14 @@ class AnimalTest {
 
     /**
      * Unit test for the getAgeInHours method.
+     *
      * @see Animal#getAgeInHours()
      */
     @Nested
     class GetAgeInHoursTest {
 
         @Test
-        void getAgeInHours_whenNull_thenReturnsExpectedValue(){
+        void getAgeInHours_whenNull_thenReturnsExpectedValue() {
             // Setup
             long expectedResult = -1;
 
@@ -174,10 +179,10 @@ class AnimalTest {
 
         @ParameterizedTest
         @EnumSource(value = RelativeTime.class, mode = EnumSource.Mode.EXCLUDE, names = {})
-        void getAgeInHours_whenTimeOfBirthPopulated_thenReturnsExpectedValue(RelativeTime value){
+        void getAgeInHours_whenTimeOfBirthPopulated_thenReturnsExpectedValue(RelativeTime value) {
             // Setup
             animal.setTimeOfBirth(value.getInstant());
-            long expectedResult = switch (value){
+            long expectedResult = switch (value) {
                 case TEN_YEARS_AGO -> -90000;
                 case YEAR_AGO -> -8784;
                 case DAY_AGO -> -24;
@@ -198,12 +203,13 @@ class AnimalTest {
 
     /**
      * Unit tests for the getAge method.
+     *
      * @see Animal#getAge(AgeUnits)
      */
     @Nested
     class GetAgeTest {
         @Test
-        void getAge_whenNull_thenReturnsExpectedValue(){
+        void getAge_whenNull_thenReturnsExpectedValue() {
             // Setup
             long expectedResult = -1;
 
@@ -216,13 +222,13 @@ class AnimalTest {
 
         @ParameterizedTest
         @EnumSource(value = RelativeTime.class, mode = EnumSource.Mode.EXCLUDE, names = {})
-        void getAge_whenYears_thenReturnsExpectedValue(RelativeTime value){
+        void getAge_whenYears_thenReturnsExpectedValue(RelativeTime value) {
             // Setup
             animal.setTimeOfBirth(value.getInstant());
-            long expectedResult = switch (value){
+            long expectedResult = switch (value) {
                 case TEN_YEARS_AGO -> -10;
                 case YEAR_AGO -> -1;
-                case DAY_AGO,HOUR_AGO, HOUR_AHEAD, DAY_AHEAD -> 0;
+                case DAY_AGO, HOUR_AGO, HOUR_AHEAD, DAY_AHEAD -> 0;
                 case YEAR_AHEAD -> 1;
                 case TEN_YEARS_AHEAD -> 10;
             };
@@ -236,10 +242,10 @@ class AnimalTest {
 
         @ParameterizedTest
         @EnumSource(value = RelativeTime.class, mode = EnumSource.Mode.EXCLUDE, names = {})
-        void getAge_whenDays_thenReturnsExpectedValue(RelativeTime value){
+        void getAge_whenDays_thenReturnsExpectedValue(RelativeTime value) {
             // Setup
             animal.setTimeOfBirth(value.getInstant());
-            long expectedResult = switch (value){
+            long expectedResult = switch (value) {
                 case TEN_YEARS_AGO -> -3750;
                 case YEAR_AGO -> -366;
                 case DAY_AGO -> -1;
@@ -259,10 +265,10 @@ class AnimalTest {
 
         @ParameterizedTest
         @EnumSource(value = RelativeTime.class, mode = EnumSource.Mode.EXCLUDE, names = {})
-        void getAge_whenHours_thenReturnsExpectedValue(RelativeTime value){
+        void getAge_whenHours_thenReturnsExpectedValue(RelativeTime value) {
             // Setup
             animal.setTimeOfBirth(value.getInstant());
-            long expectedResult = switch (value){
+            long expectedResult = switch (value) {
                 case TEN_YEARS_AGO -> -90000;
                 case YEAR_AGO -> -8784;
                 case DAY_AGO -> -24;
@@ -278,6 +284,42 @@ class AnimalTest {
 
             // Validation
             assertEquals(expectedResult, result, () -> String.format("%s: %s", value, value.getDurationString()));
+        }
+    }
+
+    /**
+     * Unit tests for the toString method.
+     *
+     * @see Animal#toString()
+     */
+    @Nested
+    class ToStringTest {
+        @ParameterizedTest
+        @EnumSource(value = RelativeTime.class, mode = EnumSource.Mode.EXCLUDE, names = {})
+        void toString_whenTimeOfBirthSet_returnsExpectedFormat(RelativeTime dateTimeValue) {
+            // Setup
+            String expectedString = String.format("Animal{timeOfBirth=%s}", dateTimeValue.getInstant());
+            animal.setTimeOfBirth(dateTimeValue.getInstant());
+
+            // Execution
+            String result = animal.toString();
+
+            // Validation
+            assertNotNull(result, "result not null");
+            assertEquals(expectedString, result, "result");
+        }
+
+        @Test
+        void toString_whenTimeOfBirthNotSet_returnsExpectedFormat() {
+            // Setup
+            String expectedString = "Animal{timeOfBirth=null}";
+
+            // Execution
+            String result = animal.toString();
+
+            // Validation
+            assertNotNull(result, "result not null");
+            assertEquals(expectedString, result, "result");
         }
     }
 }

@@ -26,10 +26,9 @@ public class Animal {
      * Retrieve the age for the animal in years.  An animal that has not
      * yet been born will have a negative age.
      *
-     * @deprecated As of 0.1, replaced by {@link #getAge(AgeUnits)}
-     *
      * @return The age of the animal in years, or a negative
      * number if the animal has not yet been born or hatched.
+     * @deprecated As of 0.1, replaced by {@link #getAge(AgeUnits)}
      */
     @Deprecated(since = "0.1", forRemoval = false)
     public long getAgeInYears() {
@@ -46,10 +45,9 @@ public class Animal {
      * Retrieve the age for the animal in days.  An animal that has not
      * yet been born will have a negative age.
      *
-     * @deprecated As of 0.1, replaced by {@link #getAge(AgeUnits)}
-     *
      * @return The age of the animal in days, or a negative
      * number if the animal has not yet been born or hatched.
+     * @deprecated As of 0.1, replaced by {@link #getAge(AgeUnits)}
      */
     @Deprecated(since = "0.1", forRemoval = false)
     public long getAgeInDays() {
@@ -66,10 +64,9 @@ public class Animal {
      * Retrieve the age for the animal in hours.  An animal that has not
      * yet been born will have a negative age.
      *
-     * @deprecated As of 0.1, replaced by {@link #getAge(AgeUnits)}
-     *
      * @return The age of the animal in days, or a negative
      * number if the animal has not yet been born or hatched.
+     * @deprecated As of 0.1, replaced by {@link #getAge(AgeUnits)}
      */
     @Deprecated(since = "0.1", forRemoval = false)
     public long getAgeInHours() {
@@ -103,5 +100,21 @@ public class Animal {
             };
         }
         return age;
+    }
+
+    /**
+     * A string representation of the Animal class.
+     *
+     * @return A string representing the data in this instance of the Animal
+     * class.
+     */
+    @Override
+    public String toString() {
+        // TODO improve the performance of this code once we discuss the
+        //  better approaches.
+        return "Animal{"
+                + "timeOfBirth="
+                + timeOfBirth
+                + '}';
     }
 }
