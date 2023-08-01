@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -17,7 +16,7 @@
         argLine will be extended by jacoco-maven-plugin.
         Additional argLine values for maven-surefire-plugin can be set here.
         -->
-        <argLine></argLine>
+        <argLine/>
         <lombok.version>1.18.28</lombok.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
@@ -41,7 +40,8 @@
     </dependencies>
 
     <build>
-        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+        <pluginManagement>
+            <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
                 <plugin>
@@ -193,6 +193,10 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.5.0</version>
                 <inherited>true</inherited>
+                <configuration>
+                    <failOnError>true</failOnError>
+                    <failOnWarnings>true</failOnWarnings>
+                </configuration>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -201,10 +205,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <failOnError>true</failOnError>
-                    <failOnWarnings>true</failOnWarnings>
-                </configuration>
             </plugin>
             <plugin>
                 <!-- https://github.com/diffplug/spotless/tree/main/plugin-maven -->
@@ -222,7 +222,7 @@
                     </markdown>
                     <java>
                         <!-- Cleanthat will refactor your code, but it may break your style: apply it before your formatter -->
-                        <cleanthat />
+                        <cleanthat/>
 
                         <googleJavaFormat>
                             <!-- GOOGLE or AOSP (optional) -->
