@@ -1,6 +1,7 @@
 package codingchica.java101;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 /** Hello world! */
@@ -51,12 +52,12 @@ public class App {
    *
    * @param newName The name to use in the application's execution.
    */
-  public App(final String newName) {
+  public App(final @NonNull String newName) {
     this.name = newName;
   }
 
   /** The name of the user of the application. */
-  @Getter @Setter private String name;
+  @Getter @Setter @NonNull private String name;
 
   /**
    * Retrieve the greeting that should be outputted when the application is run.

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 /** Unit test for simple App. */
@@ -246,6 +247,32 @@ public class AppTest {
 
       // Validation
       assertEquals(name, actualGreeting);
+    }
+
+    @Test
+    void name_whenNullInSetter_thenExceptionThrown() {
+      // Setup
+      App app = new App("Junie");
+
+      // Execution
+      Executable executable = () -> app.setName(null);
+
+      // Validation
+      Exception exception = assertThrows(IllegalArgumentException.class, executable);
+      assertEquals("name is marked non-null but is null", exception.getMessage());
+    }
+
+    @ParameterizedTest
+    @NullSource
+    void name_whenNullInConstructor_thenExceptionThrown(String name) {
+      // Setup
+
+      // Execution
+      Executable executable = () -> new App(name);
+
+      // Validation
+      Exception exception = assertThrows(IllegalArgumentException.class, executable);
+      assertEquals("newName is marked non-null but is null", exception.getMessage());
     }
 
     @ParameterizedTest
