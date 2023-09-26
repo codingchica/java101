@@ -8,8 +8,40 @@
     <version>0.1-SNAPSHOT</version>
 
     <name>java101</name>
-    <!-- FIXME change it to the project's website -->
-    <url>http://www.example.com</url>
+    <description>This is a very simple Java project with a Maven build, which is intended to showcase different Java syntax, build, coding conventions and unit testing approaches.</description>
+    <url>https://github.com/codingchica/java101</url>
+
+    <developers>
+        <developer>
+            <id>codingchica</id>
+        </developer>
+    </developers>
+
+    <mailingLists>
+        <mailingList>
+            <name>Coding Chica Blog</name>
+            <archive>https://codingchica.com/topics/java-101/</archive>
+            <otherArchives>
+                <otherArchive>https://codingchica.com/</otherArchive>
+            </otherArchives>
+        </mailingList>
+    </mailingLists>
+
+    <scm>
+        <connection>scm:git|https://github.com/codingchica/java101.git</connection>
+        <developerConnection>scm:git|https://github.com/codingchica/java101.git</developerConnection>
+        <url>https://github.com/codingchica/java101</url>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/codingchica/java101/issues</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>github actions</system>
+        <url>https://github.com/codingchica/java101/actions/workflows/maven.yml</url>
+    </ciManagement>
 
     <properties>
         <!--
@@ -153,7 +185,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>3.0.0</version>
+                    <version>3.4.5</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -289,4 +321,14 @@
             </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <!-- The version is defined in the Build Plugin Management section. Also included by default. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>

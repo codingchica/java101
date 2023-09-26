@@ -37,6 +37,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
    
-    # Perform the Maven build locally.  No artifacts are deployed
+    # Perform the Maven build and site generation locally.  No artifacts are deployed
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package site --file pom.xml
