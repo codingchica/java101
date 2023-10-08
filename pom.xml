@@ -187,6 +187,13 @@
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>3.4.5</version>
                 </plugin>
+                <plugin>
+                    <!-- Source code cross-reference pages, also used for other reports. -->
+                    <!-- https://maven.apache.org/jxr/maven-jxr-plugin/usage.html -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jxr-plugin</artifactId>
+                    <version>3.3.0</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -328,6 +335,13 @@
                 <!-- The version is defined in the Build Plugin Management section. Also included by default. -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <!-- Source code cross-reference pages, also used for other reports. -->
+                <!-- https://maven.apache.org/jxr/maven-jxr-plugin/usage.html -->
+                <!-- The version is defined in the Build Plugin Management section. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
             </plugin>
         </plugins>
     </reporting>
