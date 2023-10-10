@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter
+        xmlns="https://github.com/spotbugs/filter/3.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd">
+
+    <!--
+    https://spotbugs.readthedocs.io/en/latest/filter.html
+    https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html
+    https://spotbugs.readthedocs.io/en/latest/effort.html
+    -->
+
+    <Match>
+        <!-- Permanent: Allow Test classes to have nested inner classes that aren't static. -->
+        <Class name="~.*\.*Test" />
+        <Bug pattern="SIC_INNER_SHOULD_BE_STATIC" />
+    </Match>
+
+    <Match>
+        <!-- Permanent: Allow Test classes to call methods with @NonNull with null value. -->
+        <Class name="~.*\.*Test" />
+        <Bug pattern="NP_NONNULL_PARAM_VIOLATION" />
+    </Match>
+
+    <!--
+    If adding a new quality gate to an existing project, you may need to introduce additional exclusions.
+    For each, recommend adding a comment indicating whether the exclusion is permanent or temporary and, if
+    temporary, a ticket to track the removal of the exclusion.
+    -->
+
+</FindBugsFilter>
