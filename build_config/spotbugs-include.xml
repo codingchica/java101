@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter
+        xmlns="https://github.com/spotbugs/filter/3.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd">
+
+    <!--
+    https://spotbugs.readthedocs.io/en/latest/filter.html
+    https://spotbugs.readthedocs.io/en/latest/bugDescriptions.html
+    https://spotbugs.readthedocs.io/en/latest/effort.html
+    -->
+
+    <Match>
+        <Bug category="BAD_PRACTICE"/>
+    </Match>
+    <Match>
+        <Bug category="CORRECTNESS"/>
+    </Match>
+    <!--<Match>
+        <Bug category="EXPERIMENTAL"/>
+    </Match>-->
+    <Match>
+        <Bug category="I18N"/>
+    </Match>
+    <Match>
+        <Bug category="MALICIOUS_CODE"/>
+    </Match>
+    <Match>
+        <Bug category="MT_CORRECTNESS"/>
+    </Match>
+    <!--<Match>
+        <Bug category="NOISE"/>
+    </Match>-->
+    <Match>
+        <Bug category="PERFORMANCE"/>
+    </Match>
+    <Match>
+        <Bug category="SECURITY"/>
+    </Match>
+    <Match>
+        <Bug category="STYLE"/>
+    </Match>
+</FindBugsFilter>

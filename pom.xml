@@ -8,7 +8,8 @@
     <version>0.1-SNAPSHOT</version>
 
     <name>java101</name>
-    <description>This is a very simple Java project with a Maven build, which is intended to showcase different Java syntax, build, coding conventions and unit testing approaches.</description>
+    <description>This is a very simple Java project with a Maven build, which is intended to showcase different Java
+        syntax, build, coding conventions and unit testing approaches.</description>
     <url>https://github.com/codingchica/java101</url>
 
     <developers>
@@ -49,10 +50,24 @@
         Additional argLine values for maven-surefire-plugin can be set here.
         -->
         <argLine/>
+
+        <findsecbugs.plugin.version>1.12.0</findsecbugs.plugin.version>
+
         <lombok.version>1.18.28</lombok.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!--
+        Since these properties are needed for both build and reporting spotbugs configuration,
+        defining as properties for easier maintenance.
+        -->
+        <spotbugs.effort>Max</spotbugs.effort>
+        <spotbugs.excludeFilterFile>build_config/spotbugs-exclude.xml</spotbugs.excludeFilterFile>
+        <spotbugs.failThreshold>Low</spotbugs.failThreshold>
+        <spotbugs.includeFilterFile>build_config/spotbugs-include.xml</spotbugs.includeFilterFile>
+        <spotbugs.includeTests>true</spotbugs.includeTests>
+
         <spotless.maven.plugin.version>2.35.0</spotless.maven.plugin.version>
     </properties>
 
@@ -186,6 +201,12 @@
                 <plugin>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
                     <version>3.4.5</version>
+                </plugin>
+                <plugin>
+                    <!-- https://spotbugs.github.io/spotbugs-maven-plugin/usage.html -->
+                    <groupId>com.github.spotbugs</groupId>
+                    <artifactId>spotbugs-maven-plugin</artifactId>
+                    <version>4.7.2.1</version>
                 </plugin>
                 <plugin>
                     <!-- Source code cross-reference pages, also used for other reports. -->
@@ -326,6 +347,29 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <configuration>
+                    <!-- see also properties configured with spotbugs prefix -->
+                    <plugins>
+                        <plugin>
+                            <!-- https://find-sec-bugs.github.io/bugs.htm -->
+                            <groupId>com.h3xstream.findsecbugs</groupId>
+                            <artifactId>findsecbugs-plugin</artifactId>
+                            <version>${findsecbugs.plugin.version}</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>static-code-analysis</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -342,6 +386,22 @@
                 <!-- The version is defined in the Build Plugin Management section. -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <!-- https://spotbugs.github.io/spotbugs-maven-plugin/usage.html -->
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <configuration>
+                    <!-- see also properties configured with spotbugs prefix -->
+                    <plugins>
+                        <plugin>
+                            <!-- https://find-sec-bugs.github.io/bugs.htm -->
+                            <groupId>com.h3xstream.findsecbugs</groupId>
+                            <artifactId>findsecbugs-plugin</artifactId>
+                            <version>${findsecbugs.plugin.version}</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
             </plugin>
         </plugins>
     </reporting>
