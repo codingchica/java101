@@ -215,6 +215,13 @@
                     <artifactId>maven-jxr-plugin</artifactId>
                     <version>3.3.0</version>
                 </plugin>
+                <plugin>
+                    <!-- static code analysis quality gates and reports -->
+                    <!-- https://maven.apache.org/plugins/maven-pmd-plugin/usage.html -->
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>3.21.0</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -348,6 +355,89 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <configuration>
+                    <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+                    <targetJdk>${maven.compiler.target}</targetJdk>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!-- Checking for coding issues in main files. -->
+                        <id>pmd-main</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <phase>verify</phase>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <includeTests>false</includeTests>
+                            <rulesets>
+                                <ruleset>build_config/pmd-rules-main.xml</ruleset>
+                            </rulesets>
+                            <excludeFromFailureFile>build_config/pmd-exclude-pmd-check.properties</excludeFromFailureFile>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <!-- Checking for coding issues in test files. -->
+                        <id>cpd-main</id>
+                        <goals>
+                            <goal>cpd-check</goal>
+                        </goals>
+                        <phase>verify</phase>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <includeTests>false</includeTests>
+                            <rulesets>
+                                <ruleset>build_config/pmd-rules-main.xml</ruleset>
+                            </rulesets>
+                            <excludeFromFailureFile>build_config/pmd-exclude-cpd-check.properties</excludeFromFailureFile>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <!-- Checking for code duplication (copy-paste detector) in main files. -->
+                        <id>pmd-test</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <phase>verify</phase>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <includeTests>true</includeTests>
+                            <excludeRoots>
+                                <excludeRoot>${basedir}/src/main/java</excludeRoot>
+                            </excludeRoots>
+                            <rulesets>
+                                <ruleset>build_config/pmd-rules-test.xml</ruleset>
+                            </rulesets>
+                            <excludeFromFailureFile>build_config/pmd-exclude-pmd-check.properties</excludeFromFailureFile>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <!-- Checking for code duplication (copy-paste detector) in test files. -->
+                        <id>cpd-test</id>
+                        <goals>
+                            <goal>cpd-check</goal>
+                        </goals>
+                        <phase>verify</phase>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <includeTests>true</includeTests>
+                            <excludeRoots>
+                                <excludeRoot>${basedir}/src/main/java</excludeRoot>
+                            </excludeRoots>
+                            <rulesets>
+                                <ruleset>build_config/pmd-rules-test.xml</ruleset>
+                            </rulesets>
+                            <excludeFromFailureFile>build_config/pmd-exclude-cpd-check.properties</excludeFromFailureFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
                 <configuration>
@@ -401,6 +491,14 @@
                             <version>${findsecbugs.plugin.version}</version>
                         </plugin>
                     </plugins>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <configuration>
+                    <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+                    <targetJdk>${maven.compiler.target}</targetJdk>
                 </configuration>
             </plugin>
         </plugins>
