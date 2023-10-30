@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -287,6 +288,45 @@ public class AppTest {
 
       // Validation
       assertEquals(name, actualGreeting);
+    }
+  }
+
+  @Nested
+  class GetGreetingForMultipleNamesTest {
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    void getGreetingForMultipleNames_whenNamesNullOrEmpty_thenReturnsExpectedValue(String[] names) {
+      // Setup
+      String expectedResult = "Hello!";
+
+      // Execution
+      String actualGreeting = App.getGreetingForMultipleNames(names);
+
+      // Validation
+      assertEquals(expectedResult, actualGreeting);
+    }
+
+    @Test
+    void getGreetingForMultipleNames_whenNamesPopulated_thenReturnsExpectedValue() {
+      // Setup
+      String[] names =
+          new String[] {
+            /* Filtered out */ null,
+            "Jane",
+            /* filtered out */ "",
+            "Sally",
+            /* filtered out */ "   ",
+            /* duplicate filtered out */ "Jane",
+            /* Sorted to the beginning.*/ "Bonnie",
+          };
+      String expectedResult = "Hello Bonnie, Jane, and Sally!";
+
+      // Execution
+      String actualGreeting = App.getGreetingForMultipleNames(names);
+
+      // Validation
+      assertEquals(expectedResult, actualGreeting);
     }
   }
 }
