@@ -1,11 +1,17 @@
 package codingchica.java101;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
 /** Hello world! */
 public class App {
+  /** The initial capacity expected for a greeting String. */
+  private static final int INITIAL_GREETING_CAPACITY = 50;
+
   /**
    * Add two byte values.
    *
@@ -66,6 +72,54 @@ public class App {
    */
   public String getGreeting() {
     return String.format("Hello, %s!", this.name);
+  }
+
+  /**
+   * A utility function to generate a greeting for multiple names.
+   *
+   * @param namesToGreet The list of names to include in the greeting
+   * @return A greeting in english with names, if available.
+   */
+  public static String getGreetingForMultipleNames(String[] namesToGreet) {
+    StringBuilder stringBuilder = new StringBuilder(INITIAL_GREETING_CAPACITY);
+    String prefix = "Hello";
+
+    stringBuilder.append(prefix);
+    if (namesToGreet != null) {
+      List<String> distinctNames =
+          Arrays.stream(namesToGreet)
+              .filter(Objects::nonNull) // Filter out null values
+              .filter(item -> !item.isBlank()) // Filter out blank strings
+              .distinct() // Filter out duplicate values
+              .sorted() // Alphabetized
+              .toList(); // Save as a list
+
+      String lastValue =
+          distinctNames.stream()
+              .reduce((first, second) -> second) // Find last value
+              .orElseGet(() -> null); // Default to null
+
+      distinctNames.forEach(
+          name -> {
+            // Separate names with a comma
+            if (stringBuilder.length() > prefix.length()) {
+              stringBuilder.append(',');
+            }
+
+            // Space between each segment
+            stringBuilder.append(' ');
+
+            // The last name should be preceded with and
+            if (lastValue != null && lastValue.equals(name)) {
+              stringBuilder.append("and ");
+            }
+
+            stringBuilder.append(name);
+          });
+    }
+    stringBuilder.append('!');
+
+    return stringBuilder.toString();
   }
 
   /**
