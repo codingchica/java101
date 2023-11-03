@@ -6,11 +6,15 @@ import java.util.Objects;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.Synchronized;
 
 /** Hello world! */
 public class App {
   /** The initial capacity expected for a greeting String. */
   private static final int INITIAL_GREETING_CAPACITY = 50;
+
+  /** A possibly multi-threaded approach to building a String. */
+  private final StringBuffer greetingStringBuffer = new StringBuffer(INITIAL_GREETING_CAPACITY);
 
   /**
    * Add two byte values.
@@ -120,6 +124,36 @@ public class App {
     stringBuilder.append('!');
 
     return stringBuilder.toString();
+  }
+
+  /**
+   * Call with no name (null or empty name) to obtain the existing greeting. Call with a non-blank
+   * name to add the name to the existing greeting and return it.
+   *
+   * @param name The name to add to the greeting, if any.
+   * @return The current greeting.
+   */
+  @Synchronized
+  public String addNameToGreeting(String name) {
+    String prefix = "Hello!";
+    if (greetingStringBuffer.length() == 0) {
+      greetingStringBuffer.append(prefix);
+    }
+
+    if (name != null && !name.isBlank() && greetingStringBuffer.indexOf(name) < 0) {
+      int indexOfBang = greetingStringBuffer.indexOf("!");
+      if (indexOfBang >= 0) {
+        greetingStringBuffer.delete(indexOfBang, greetingStringBuffer.length());
+      }
+      if (greetingStringBuffer.length() > prefix.length()) {
+        greetingStringBuffer.append(',');
+      }
+      greetingStringBuffer.append(' ');
+
+      greetingStringBuffer.append(name);
+      greetingStringBuffer.append('!');
+    }
+    return greetingStringBuffer.toString();
   }
 
   /**

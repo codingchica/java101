@@ -3,6 +3,7 @@ package codingchica.java101;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -327,6 +328,57 @@ public class AppTest {
 
       // Validation
       assertEquals(expectedResult, actualGreeting);
+    }
+  }
+
+  @Nested
+  class AddNameToGreetingTest {
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {" ", "    "})
+    void addNameToGreeting_whenNamesNullOrBlank_thenReturnsExpectedValue(String name) {
+      // Setup
+      String expectedResult = "Hello!";
+      App app = new App("Sally");
+
+      // Execution
+      String actualGreeting = app.addNameToGreeting(name);
+
+      // Validation
+      assertEquals(expectedResult, actualGreeting, () -> String.format("Adding %s", name));
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        value = {
+          " |Mary Jane|Jim|Jane:"
+              + "Hello!|Hello Mary Jane!|Hello Mary Jane, Jim!|Hello Mary Jane, Jim!:"
+              + "Hello!"
+        },
+        ignoreLeadingAndTrailingWhitespace = false,
+        delimiter = ':')
+    void addNameToGreeting_whenNamesPopulated_thenReturnsExpectedValue(
+        String pipeDelimitedNames,
+        String pipeDelimitedExpectedResults) {
+      // Setup
+      String[] names = pipeDelimitedNames.split("\\|");
+      String[] expectedResults = pipeDelimitedExpectedResults.split("\\|");
+      assertEquals(names.length, expectedResults.length, "size");
+      App app = new App("Someone");
+
+      IntStream.range(0, names.length)
+          .forEachOrdered(
+              count -> {
+                // Execution
+                String actualGreeting = app.addNameToGreeting(names[count]);
+
+                // Validation
+                assertEquals(
+                    expectedResults[count],
+                    actualGreeting,
+                    () -> String.format("Adding %s", names[count]));
+              });
     }
   }
 }
